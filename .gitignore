@@ -1,0 +1,180 @@
+# =============================================================
+# .gitignore — JS POO 2026
+# =============================================================
+# Regra geral: só sobe código-fonte e documentação em texto.
+# Tudo o que depende do ambiente local, contém credenciais
+# ou pode ser regenerado fica fora do repositório.
+# =============================================================
+
+
+# -------------------------------------------------------------
+# SEGURANÇA — nunca subir para o Git
+# -------------------------------------------------------------
+
+# Variáveis de ambiente (credenciais do banco, chaves de API,
+# segredos de sessão, senhas). Cada dev cria o seu local.
+.env
+.env.*
+!.env.example
+
+# Certificados e chaves privadas
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+
+
+# -------------------------------------------------------------
+# DEPENDÊNCIAS — regeneradas com npm install
+# -------------------------------------------------------------
+
+node_modules/
+jspm_packages/
+
+
+# -------------------------------------------------------------
+# ARQUIVOS DE LOCK — opinião de projeto
+# -------------------------------------------------------------
+# Descomente a linha abaixo se o time decidir não versionar
+# o package-lock.json (não recomendado para apps; ok para libs)
+
+# package-lock.json
+
+
+# -------------------------------------------------------------
+# UPLOADS DE USUÁRIO — arquivos enviados em runtime
+# -------------------------------------------------------------
+# A pasta uploads/ é criada automaticamente pelo Multer.
+# Arquivos enviados em produção/desenvolvimento não pertencem
+# ao repositório — podem ser grandes e contêm dados de usuário.
+
+**/uploads/*
+
+# Mantém a pasta no repositório mesmo vazia (Git não versiona
+# pastas vazias — o .gitkeep serve de marcador)
+!**/uploads/.gitkeep
+
+
+# -------------------------------------------------------------
+# APRESENTAÇÕES E DOCUMENTOS BINÁRIOS
+# -------------------------------------------------------------
+# PowerPoints, PDFs e similares são binários volumosos.
+# Prefira armazenar em Google Drive, SharePoint ou similar
+# e linkar no README.
+
+*.pptx
+*.ppt
+*.pptm
+*.ppsx
+
+*.pdf
+
+*.docx
+*.doc
+*.docm
+
+*.xlsx
+*.xls
+*.xlsm
+
+*.odt
+*.odp
+*.ods
+
+
+# -------------------------------------------------------------
+# IMAGENS E MÍDIAS (exceto as do projeto em si)
+# -------------------------------------------------------------
+# Descomente se quiser ignorar imagens completamente.
+# Mantenha comentado se o projeto usa imagens no código-fonte
+# (ícones, diagramas de README, capturas de tela de documentação).
+
+# *.png
+# *.jpg
+# *.jpeg
+# *.gif
+# *.webp
+# *.svg
+# *.ico
+
+# Imagens de saída de exercícios (não são parte do código)
+**/saída.png
+**/saida.png
+**/output.png
+diag-fluxo-*.png
+
+
+# -------------------------------------------------------------
+# SISTEMAS OPERACIONAIS
+# -------------------------------------------------------------
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux
+*~
+
+
+# -------------------------------------------------------------
+# EDITORES E IDEs
+# -------------------------------------------------------------
+
+# VS Code (configurações pessoais ficam fora; configurações de
+# projeto como extensions.json podem ser versionadas se o time quiser)
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+
+# JetBrains (WebStorm, IntelliJ)
+.idea/
+
+# Vim / Neovim
+*.swp
+*.swo
+Session.vim
+
+# Sublime Text
+*.tmlanguage.cache
+*.tmPreferences.cache
+*.stTheme.cache
+*.sublime-workspace
+
+
+# -------------------------------------------------------------
+# LOGS E TEMPORÁRIOS
+# -------------------------------------------------------------
+
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pids/
+*.pid
+*.seed
+
+
+# -------------------------------------------------------------
+# BUILD E DISTRIBUIÇÃO
+# -------------------------------------------------------------
+
+dist/
+build/
+out/
+.cache/
+.parcel-cache/
+.next/
+.nuxt/
