@@ -2,12 +2,55 @@
 // PARTE 2: PROGRAMAÇÃO ORIENTADA A OBJETOS EM JS
 // ==========================================
 
+class Cachorro {
+    // # Atributos privados (Encapsulado)
+    // ou seja não permite acesso direto
+    #nome
+    #comida
+    #sono
 
+    // Método Construtor (Executado automaticamente)
+    // quando criamos um objeto
+    // Ele recebe valores iniciais e salva
+    // dentro dos atributos (Prepara para objeto)
+    // this é como dizer "Meu próprio atributo"
 
-// Digitar o código (Feito pelo Professor - AQUI)
+    constructor(nome, comida, sono) {
+        this.#nome = nome
+        this.#comida = comida
+        this.#sono = sono
+    }
 
+    // Método comer
+    comer() {
+        this.#comida -= 1
+    }
 
+    // Método dormir
+    dormir() {
+        this.#sono = false
+    }
 
+    // Getters para poder acessar
+    getNome(){
+        return this.#nome
+    }
+    getComida(){
+        return this.#comida
+    }
+    getSono(){
+        return this.#sono
+    }
+
+}
+
+// Criando instâncias ou objetos
+const cachorro1 = new Cachorro("Bob", 5, false)
+const cachorro2 = new Cachorro("Snoop", 8, true)
+
+// Usando métodos
+cachorro1.comer()
+cachorro2.dormir()
 
 // ==========================================
 // EXIBINDO RESULTADOS NO NAVEGADOR
