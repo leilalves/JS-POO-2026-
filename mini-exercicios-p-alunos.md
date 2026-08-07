@@ -340,18 +340,6 @@ module.exports = pool.promise();
 
 
 
-// 9º Digitar o código (Feito pelo Professor - AQUI)
-
-
-
-
-
-// GET /api/itens        → lista todos
-// GET /api/itens?busca= → filtra por nome
-
-
-
-
 
 // 10º Digitar o código (Feito pelo Professor - AQUI)
 

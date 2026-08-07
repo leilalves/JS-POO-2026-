@@ -24,10 +24,15 @@ class ItemController {
             // Pega o valor de "busca" da URL (?busca=...); se não vier nenhum, fica vazio.
             const termo = req.query.busca || '';
 
+            // await pausa aqui até o banco responder
             const itens = termo
                 ? await Item.buscarPorNome(termo)
                 : await Item.buscarTodos();
+            res.json(itens);
+            
         } catch (erro) {
+            // Qualquer erro do banco cai aqui
+            // Em produção: logar o erro, não expor detalhes ao cliente
             console.error('Erro de buscar itens', erro);
             res.status(500).json({ erro: 'Erro interno do servidor'});
         }
@@ -35,23 +40,4 @@ class ItemController {
 
 }
 
-
-  // 6º Digitar o código (Feito pelo Professor - AQUI)
-
-
-
-
-      // await pausa aqui até o banco responder
-
-
-
-    // 7º Digitar o código (Feito pelo Professor - AQUI)
-
-
-
-      // Qualquer erro do banco cai aqui
-      // Em produção: logar o erro, não expor detalhes ao cliente
-
-
-
-      // 8º Digitar o código (Feito pelo Professor - AQUI)
+module.exports = ItemController;

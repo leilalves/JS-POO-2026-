@@ -69,8 +69,8 @@ class item {
     // Equivalente a: SELECT * FROM itens WHERE nome LIKE '%termo%'
     // ─────────────────────────────────────────────────────────
     static async buscarPorNome(termo) {
-        const [rows] = await pool.query('SELECT * FROM itens WHERE nome LIKE ? ' ,
-            [`%${termo}`] );
+        const [rows] = await pool.query('SELECT * FROM itens WHERE nome LIKE ?' ,
+            [`%${termo}%`] );
             return rows;
     }
 

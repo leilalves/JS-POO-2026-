@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Mini 1 — MVC</title>
+</head>
+<body>
+
+  <h2>Lista de Itens</h2>
+
+  <input id="busca" placeholder="Buscar..." oninput="buscar()">
+
+  <ul id="lista"></ul>
+
+  <script>
+    // ── VIEW (frontend) ───────────────────────────────────────
+    // Responsabilidade única: chamar a API e renderizar o resultado.
+    // Não sabe como os dados foram buscados nem de onde vieram.
+    // ─────────────────────────────────────────────────────────
+
+    function buscar() {
+      const termo = document.getElementById('busca').value;
+
+      fetch('/api/itens?busca=' + termo)
+        .then(res => res.json())
+        .then(itens => {
+          document.getElementById('lista').innerHTML =
+            itens.map(i => '<li>' + i.nome + '</li>').join('');
+        })
+        .catch(() => {
+          document.getElementById('lista').innerHTML =
+            '<li>Erro ao carregar itens.</li>';
+        });
+    }
+
+    buscar();
+  </script>
+
+</body>
+</html>
