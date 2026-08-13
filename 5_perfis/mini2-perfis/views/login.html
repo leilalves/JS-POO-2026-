@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+</head>
+<body>
+
+  <h2>Login</h2>
+
+  <!--
+    action="/login" method="POST"
+    Envia usuário e senha para AuthController.login() via req.body
+  -->
+  <form action="/login" method="POST">
+
+    <label>Usuário:
+      <select name="usuario">
+        <option value="admin">admin</option>
+        <option value="gerente">gerente</option>
+        <option value="cliente">cliente</option>
+      </select>
+    </label>
+
+    <br><br>
+
+    <label>Senha: <input type="password" name="senha" value="123"></label>
+
+    <br><br>
+
+    <button type="submit">Entrar</button>
+
+  </form>
+
+  <p><small>Senha de todos: 123</small></p>
+
+</body>
+</html>
