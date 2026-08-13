@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Painel</title>
+</head>
+<body>
+
+  <h2>Painel — <span id="titulo-perfil"></span></h2>
+
+  <!--
+    data-perfis → lista os perfis que podem ver este bloco.
+    O JavaScript lê esse atributo e esconde os não permitidos.
+    Múltiplos perfis separados por vírgula: "admin,gerente"
+  -->
+
+  <div data-perfis="admin">
+    <p>🔴 Você é <strong>admin</strong>. Você vê tudo.</p>
+  </div>
+
+  <div data-perfis="admin,gerente">
+    <p>🟡 Você é <strong>admin ou gerente</strong>. Bloco compartilhado.</p>
+  </div>
+
+  <div data-perfis="cliente">
+    <p>🟢 Você é <strong>cliente</strong>. Você vê apenas seus dados.</p>
+  </div>
+
+  <br>
+
+  <form action="/logout" method="POST">
+    <button type="submit">Sair</button>
+  </form>
+
+  <script>
+    // Busca o perfil do usuário logado via GET /api/painel
+    // Se a sessão expirou, o servidor redireciona para /login
+    // e res.ok será false — tratamos redirecionando no frontend
+    fetch('/api/painel')
+      .then(res => {
+        if (!res.ok) {
+          window.location.href = '/login';
+        }
+        return res.json();
+      })
+      .then(dados => {
+
+        document.getElementById('titulo-perfil').textContent =
+          dados.usuario + ' (' + dados.perfil + ')';
+
+        // Percorre todos os blocos com data-perfis
+        // Exibe os que incluem o perfil atual, esconde os demais
+        // ATENÇÃO: proteção visual apenas — barreira real é o backend
+        document.querySelectorAll('[data-perfis]').forEach(bloco => {
+          const permitidos = bloco.getAttribute('data-perfis').split(',');
+          bloco.style.display = permitidos.includes(dados.perfil) ? 'block' : 'none';
+        });
+
+      });
+  </script>
+
+</body>
+</html>
