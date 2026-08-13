@@ -1,9 +1,20 @@
+// ============================================================
+// routes/api.js — ROTAS
+//
+// Rotas públicas  → acessíveis sem login
+// Rotas protegidas → verificarSessao roda antes do Controller
+//
+// Leitura de cada linha:
+//   router.MÉTODO('caminho', [middleware?], Controller.método)
+// ============================================================
+
 const express             = require('express');
 const router              = express.Router();
 const path                = require('path');
-const verificarSessao     = require('../middleware/auth'); 
+const { verificarSessao } = require('../middleware/auth');
 const AuthController      = require('../controllers/AuthController');
 const PainelController    = require('../controllers/PainelController');
+
 
 // ── ROTAS PÚBLICAS ────────────────────────────────────────────
 

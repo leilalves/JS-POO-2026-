@@ -1,3 +1,4 @@
+// ============================================================
 // server.js — PONTO DE ENTRADA
 //
 // Responsabilidades:

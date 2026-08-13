@@ -1,3 +1,4 @@
+// ============================================================
 // middleware/auth.js — MIDDLEWARE DE AUTENTICAÇÃO
 //
 // Função que roda ANTES do Controller em rotas protegidas.
@@ -13,18 +14,18 @@
 //   router.get('/painel', verificarSessao, PainelController.dados)
 //                          ↑ roda primeiro    ↑ só roda se passar
 // ============================================================
-
-function verificarSessao(req, res, next) {
+function verificarSessao(req, res, next){
     // req.session.usuario só existe após AuthController.login()
     // ter salvo os dados — se não existe, não há sessão ativa
-
     if(!req.session.usuario) {
         return res.redirect('/login');
     }
 
-    //Sessão válida => passa para o Controller
+    // Sessão válida -> passa para o Controller
     next();
+}
 
-};
+module.exports = {verificarSessao};
 
-module.exports = verificarSessao; 
+
+

@@ -1,3 +1,4 @@
+// ============================================================
 // controllers/PainelController.js — CONTROLLER DO PAINEL
 //
 // Devolve os dados do usuário logado ao frontend.

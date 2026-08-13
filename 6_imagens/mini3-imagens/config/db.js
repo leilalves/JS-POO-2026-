@@ -1,3 +1,4 @@
+// Igual aos minis anteriores — pool de conexões com o banco
 require('dotenv').config();
 const mysql = require('mysql2');
 

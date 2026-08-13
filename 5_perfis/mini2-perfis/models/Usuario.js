@@ -1,3 +1,4 @@
+// ============================================================
 // models/Usuario.js — MODEL
 //
 // Cuida de tudo relacionado aos dados de usuário:
