@@ -1,3 +1,29 @@
+// ============================================================
+// controllers/ItemController.js — CONTROLLER
+//
+// Dois métodos:
+//   cadastrar → recebe nome + arquivo, salva no banco
+//   listar    → retorna todos os itens com caminho da imagem
+//
+// ── O que o Multer entrega ao Controller ─────────────────────
+//
+// Quando o Multer processa o upload antes do Controller,
+// ele adiciona à requisição:
+//
+//   req.file → objeto com dados do arquivo salvo:
+//     {
+//       fieldname:    'foto',          ← nome do campo no form
+//       originalname: 'minha-foto.jpg',← nome original do usuário
+//       filename:     '1714900_49.jpg',← nome salvo no servidor
+//       path:         'uploads/1714900_49.jpg', ← caminho completo
+//       size:         48291            ← tamanho em bytes
+//     }
+//
+//   req.body → campos de texto do formulário (nome, etc.)
+//
+// Se nenhum arquivo foi enviado, req.file será undefined.
+// ============================================================
+
 const Item = require('../models/Item');
 
 
