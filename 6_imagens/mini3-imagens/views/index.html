@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Mini 3 — Imagens</title>
+</head>
+<body>
+
+  <h2>Cadastrar Item com Foto</h2>
+
+  <!--
+    enctype="multipart/form-data" é OBRIGATÓRIO para upload de arquivos.
+    Sem ele, o arquivo não é enviado — só o nome de texto.
+    O Multer só consegue processar requisições com este enctype.
+  -->
+  <form id="form-cadastro" enctype="multipart/form-data">
+
+    <label>Nome: <input type="text" name="nome" required></label>
+    <br><br>
+
+    <!--
+      name="foto" deve bater com upload.single('foto') em routes/api.js
+      O Multer usa esse name para identificar qual campo é o arquivo
+    -->
+    <label>Foto: <input type="file" name="foto" accept="image/*" required></label>
+    <br><br>
+
+    <button type="submit">Cadastrar</button>
+
+  </form>
+
+  <hr>
+
+  <h2>Itens Cadastrados</h2>
+  <div id="lista"></div>
+
+  <script>
+
+    // ── CADASTRAR ─────────────────────────────────────────────
+    // Para enviar arquivos via fetch, usamos FormData.
+    // FormData serializa automaticamente o form incluindo o arquivo.
+    //
+    // NÃO use JSON.stringify com arquivos — JSON não suporta binários.
+    // FormData com fetch é o equivalente ao <form enctype="multipart">
+    // mas feito via JavaScript, sem recarregar a página.
+    // ─────────────────────────────────────────────────────────
+    document.getElementById('form-cadastro').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      // FormData captura todos os campos do form, incluindo o arquivo
+      const formData = new FormData(e.target);
+
+      const res = await fetch('/api/itens', {
+        method: 'POST',
+        body: formData
+        // NÃO defina Content-Type aqui — o browser define automaticamente
+        // o boundary correto do multipart. Definir manualmente quebra o upload.
+      });
+
+      if (res.ok) {
+        e.target.reset();   // Limpa o formulário
+        carregarItens();    // Recarrega a lista
+      } else {
+        alert('Erro ao cadastrar item.');
+      }
+    });
+
+
+    // ── LISTAR ────────────────────────────────────────────────
+    // Busca todos os itens e renderiza nome + imagem.
+    //
+    // item.foto → caminho salvo no banco: "uploads/1714900_49.jpg"
+    // <img src="uploads/1714900_49.jpg"> funciona porque o server.js
+    // serve a pasta uploads/ como estática em /uploads
+    // ─────────────────────────────────────────────────────────
+    async function carregarItens() {
+      const res   = await fetch('/api/itens');
+      const itens = await res.json();
+
+      document.getElementById('lista').innerHTML = itens.map(item => `
+        <div>
+          <p><strong>${item.nome}</strong></p>
+          <img src="${item.foto}" width="150">
+          <hr>
+        </div>
+      `).join('');
+    }
+
+    carregarItens();
+
+  </script>
+
+</body>
+</html>

@@ -49,7 +49,7 @@ const storage = multer.diskStorage({
 
     // path.extname extrai a extensão original: '.jpg', '.png', etc.
     const extensao = path.extname(file.originalname);
-    const nomeUnico = Date.Now() + '_' + Math.round(Math.random() * 1e9) + extensao;
+    const nomeUnico = Date.now() + '_' + Math.round(Math.random() * 1e9) + extensao;
 
     cb(null, nomeUnico);
     }
